@@ -1,10 +1,12 @@
 #version 150
 
-uniform vec3 color;
+in vec2 textCoords;
+
+uniform sampler2D img;
 
 out vec4 out_Color;
 
 void main(void)
 {
-    out_Color = vec4(color,1);
+    out_Color = texture(img, textCoords);
 }

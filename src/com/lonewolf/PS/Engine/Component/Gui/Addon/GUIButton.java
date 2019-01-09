@@ -4,6 +4,7 @@ import com.lonewolf.PS.Engine.Component.Gui.GUIAddon;
 import com.lonewolf.PS.Engine.Core.Input;
 import com.lonewolf.PS.Engine.Core.Vector2f;
 import com.lonewolf.PS.Engine.Core.Vector3f;
+import com.lonewolf.PS.Engine.Render.RenderHelper.BoxRender;
 import com.lonewolf.PS.Engine.Render.RenderingEngine;
 import com.lonewolf.PS.Engine.Render.Shader;
 import com.lonewolf.PS.Engine.Render.Texture;
@@ -18,6 +19,9 @@ public abstract class GUIButton extends GUIAddon
     private float width;
     private float height;
     private String Text;
+    private BoxRender boxRender;
+
+    private Texture texture;
 
     public GUIButton(float x, float y, float width, float height, String text) {
         this.x = x;
@@ -25,21 +29,17 @@ public abstract class GUIButton extends GUIAddon
         this.width = width;
         this.height = height;
         Text = text;
+
+        boxRender = new BoxRender(width, height, x, y);
+        texture = new Texture("white.jpg");
     }
 
     @Override
     public void Render2D(Shader shader, RenderingEngine renderingEngine)
     {
         shader.bind();
-
-        shader.SetUniform("color", new Vector3f(0.25f,0.25f,0.25f));
-
-        glBegin(GL_TRIANGLE_STRIP);
-            glVertex2f(x,y);
-            glVertex2f(x, y + height);
-            glVertex2f(x + width, y);
-            glVertex2f(x+width, y + height);
-        glEnd();
+        texture.Bind();
+        boxRender.render(shader);
     }
 
     @Override

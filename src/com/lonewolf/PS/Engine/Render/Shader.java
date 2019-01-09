@@ -310,6 +310,11 @@ public class Shader
         return shaderSource.toString();
     }
 
+    public void SetUniform(String uniformName, Vector2f value)
+    {
+        glUniform2f(shaderResources.GetUniforms().get(uniformName), value.GetX(), value.GetY());
+    }
+
     public void SetUniformi(String uniformName, int value)
     {
         glUniform1i(shaderResources.GetUniforms().get(uniformName), value);

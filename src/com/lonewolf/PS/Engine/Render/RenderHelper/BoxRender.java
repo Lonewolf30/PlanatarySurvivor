@@ -1,5 +1,8 @@
 package com.lonewolf.PS.Engine.Render.RenderHelper;
 
+import com.lonewolf.PS.Engine.Core.Vector2f;
+import com.lonewolf.PS.Engine.Render.Shader;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class BoxRender
@@ -17,14 +20,17 @@ public class BoxRender
         this.y = y;
     }
 
-    public void render()
+    public void render(Shader shader)
     {
+        shader.SetUniform("offset", new Vector2f(x,y));
+        shader.SetUniform("scale", new Vector2f(width, height));
+
         glBegin(GL_TRIANGLE_STRIP);
 
-        glVertex2f(   x      ,   y);
-        glVertex2f(   x      ,y + height);
-        glVertex2f(x+width,   y);
-        glVertex2f(x+width,y + height);
+        glVertex2f(-1,-1);
+        glVertex2f(-1,1);
+        glVertex2f(1,-1);
+        glVertex2f(1,1);
 
         glEnd();
     }

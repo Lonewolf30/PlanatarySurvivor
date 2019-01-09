@@ -12,16 +12,14 @@ public class GUIText extends GUIAddon
     private TextRender textRender;
     private float x;
     private float y;
-    private float scale;
     private BoxRender boxRender;
 
-    public GUIText(String text, float x, float y, float scale, boolean changes)
+    public GUIText(String text, float x, float y, boolean changes)
     {
         this.textRender = new TextRender(text, changes);
         this.x = x;
         this.y = y;
-        this.scale = scale;
-        boxRender = new BoxRender(text.length()*8, 8, x , y);
+        boxRender = new BoxRender(0.5f, 0.5f, x , y);
     }
 
     public void setText(String text)
@@ -33,8 +31,7 @@ public class GUIText extends GUIAddon
     public void Render2D(Shader shader, RenderingEngine renderingEngine)
     {
         shader.bind();
-        shader.SetUniform("color", new Vector3f(1,0,1));
-        textRender.getTextTexture().Bind();
-        boxRender.render();
+        shader.SetUniformi("img", textRender.getTextTexture().GetID());
+        boxRender.render(shader);
     }
 }
