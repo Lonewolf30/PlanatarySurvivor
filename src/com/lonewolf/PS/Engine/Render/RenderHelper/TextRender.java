@@ -1,11 +1,16 @@
 package com.lonewolf.PS.Engine.Render.RenderHelper;
 
 import com.lonewolf.PS.Engine.Render.Texture;
+import com.lonewolf.PS.Reference;
 
+import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageOutputStream;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
+import java.awt.image.*;
+import java.io.File;
+import java.io.IOException;
 
 public class TextRender
 {
@@ -15,7 +20,7 @@ public class TextRender
 
     public TextRender(String text, boolean textChanges)
     {
-        this.text = text;
+        this.text = " "+text;
         this.textChanges = textChanges;
         generateBufferedImage();
     }
@@ -27,40 +32,38 @@ public class TextRender
 
     private void generateBufferedImage()
     {
-        //First, we have to calculate the string's width and height
-
         BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics g = img.getGraphics();
 
-        //Set the font to be used when drawing the string
-        Font f = new Font("Tahoma", Font.PLAIN, 48);
+        Font f = new Font(Reference.configs.getValue("font"), Font.PLAIN, 64);
         g.setFont(f);
 
-        //Get the string visual bounds
         FontRenderContext frc = g.getFontMetrics().getFontRenderContext();
         Rectangle2D rect = f.getStringBounds(text, frc);
-        //Release resources
+
         g.dispose();
 
-        //Then, we have to draw the string on the final image
-
-        //Create a new image where to print the character
         img = new BufferedImage((int) Math.ceil(rect.getWidth()), (int) Math.ceil(rect.getHeight()), BufferedImage.TYPE_4BYTE_ABGR);
         g = img.getGraphics();
-        g.setColor(Color.black); //Otherwise the text would be white
         g.setFont(f);
 
-        //Calculate x and y for that string
         FontMetrics fm = g.getFontMetrics();
         int x = 0;
-        int y = fm.getAscent(); //getAscent() = baseline
+        int y = fm.getAscent();
         g.drawString(text, x, y);
 
-        //Release resources
         g.dispose();
 
-        //Return the image
-        image = img;
+        image = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+
+        for (int i = 1; i < img.getWidth(); i++)
+        {
+            for (int j = 1; j < img.getHeight(); j++)
+            {
+                image.setRGB(i, j , img.getRGB(i, img.getHeight()-j));
+            }
+        }
+
     }
 
     public Texture getTextTexture()

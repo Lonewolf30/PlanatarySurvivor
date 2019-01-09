@@ -47,10 +47,10 @@ public abstract class GUIButton extends GUIAddon
     {
         if (Input.GetMouseDown(0))
         {
-            Vector2f pos = Input.GetMousePosition().Sub(Window.getDisplaySize().Div(2)).Div(Window.getDisplaySize().Div(2));
+            Vector2f pos = Input.GetMousePosition();
 
-            if (pos.GetX() > x && pos.GetX() < x + width)
-                if (pos.GetY() > y && pos.GetY() < y + height)
+            if (pos.GetX() > x - width/2 && pos.GetX() < x + width/2)
+                if (pos.GetY() > y - height/2 && pos.GetY() < y + height/2)
                     run();
         }
     }

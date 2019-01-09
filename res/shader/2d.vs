@@ -9,6 +9,6 @@ out vec2 textCoords;
 
 void main(void)
 {
-    gl_Position = vec4((pos + offset)*scale, 0 ,1.0);
+    gl_Position = vec4(offset + (pos *scale), 0 ,1.0);
     textCoords = pos;
 }

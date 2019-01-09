@@ -6,6 +6,7 @@ import com.lonewolf.PS.Engine.Render.RenderHelper.BoxRender;
 import com.lonewolf.PS.Engine.Render.RenderHelper.TextRender;
 import com.lonewolf.PS.Engine.Render.RenderingEngine;
 import com.lonewolf.PS.Engine.Render.Shader;
+import com.lonewolf.PS.Engine.Render.Window;
 
 public class GUIText extends GUIAddon
 {
@@ -19,7 +20,7 @@ public class GUIText extends GUIAddon
         this.textRender = new TextRender(text, changes);
         this.x = x;
         this.y = y;
-        boxRender = new BoxRender(0.25f, 0.25f, x , y);
+        boxRender = new BoxRender(40 * text.length(), 100, x , y);
     }
 
     public void setText(String text)
@@ -31,7 +32,7 @@ public class GUIText extends GUIAddon
     public void Render2D(Shader shader, RenderingEngine renderingEngine)
     {
         shader.bind();
-        shader.SetUniformi("img", textRender.getTextTexture().GetID());
+        textRender.getTextTexture().Bind();
         boxRender.render(shader);
     }
 }

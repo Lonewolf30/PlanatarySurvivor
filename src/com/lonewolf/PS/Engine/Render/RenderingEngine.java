@@ -33,6 +33,10 @@ public class RenderingEngine extends MappedValues
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_TEXTURE_2D);
 
+		glEnable(GL_ALPHA_TEST);
+
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 		Shader3D = new Shader("main");
 		Shader2D = new Shader("2d");
 		lights = new ArrayList<>();
