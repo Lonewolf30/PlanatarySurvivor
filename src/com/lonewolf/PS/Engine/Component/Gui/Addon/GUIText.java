@@ -19,7 +19,7 @@ public class GUIText extends GUIAddon
         this.textRender = new TextRender(text, changes);
         this.x = x;
         this.y = y;
-        boxRender = new BoxRender(0.5f, 0.5f, x , y);
+        boxRender = new BoxRender(0.25f, 0.25f, x , y);
     }
 
     public void setText(String text)

@@ -22,7 +22,9 @@ public class Player extends BaseEntity
     }
 
     public void setGuiFactory(GuiFactory factory)
-    {}
+    {
+
+    }
 
     private void initPlayer()
     {
@@ -31,8 +33,8 @@ public class Player extends BaseEntity
 
         guiFactory = new GuiFactory(Input.KEY_ESCAPE);
 
-        guiFactory.addItem(new GUIText("Pause Screen",0f,0, false));
-        guiFactory.addItem(new GUIButton(0,0,0.5f,0.5f,"Test") {
+        guiFactory.addItem(new GUIText("Pause Screen",-1f,-1, false));
+        guiFactory.addItem(new GUIButton(0f,0f,0.25f,0.25f,"Test") {
             @Override
             public void run() {
                 engine.stop();
