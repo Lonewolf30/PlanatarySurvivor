@@ -26,7 +26,10 @@ public class TextRender
     {
         BufferedImage image = new BufferedImage(text.length()*8,8,1);
 
+        for(char c : text.toCharArray())
+        {
 
+        }
     }
 
     public Texture getTextTexture()
