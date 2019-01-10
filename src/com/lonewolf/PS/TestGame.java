@@ -14,11 +14,18 @@ public class TestGame extends Game
     {
         GuiFactory factory = new GuiFactory( 0);
 
-        factory.addItem(new GUIButton(300,250,400,200,"Run Game")
+        factory.addItem(new GUIButton(300,350,400,200,"Run Game")
         {
             @Override
             public void run() {
                 engine.setGame(new MainGame());
+            }
+        });
+
+        factory.addItem(new GUIButton(300,150,400,200,"Exit") {
+            @Override
+            public void run() {
+                engine.stop();
             }
         });
 

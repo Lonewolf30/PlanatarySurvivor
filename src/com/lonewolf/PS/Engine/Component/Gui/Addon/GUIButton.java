@@ -30,6 +30,7 @@ public abstract class GUIButton extends GUIAddon
         this.width = width;
         this.height = height;
         this.text = new GUIText(text, x+width/32,y+height/8, false);
+        this.text.center(x,y, width,height);
 
         boxRender = new BoxRender(width, height, x, y);
         texture = new Texture("test.jpg");
