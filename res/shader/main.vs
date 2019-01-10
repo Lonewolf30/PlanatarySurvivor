@@ -22,5 +22,6 @@ void main(void)
 
 	surfaceNormal = (transform * vec4(normal,0.0)).xyz;
 	toLightVector = lightPos - (location * vec4(position,1.0)).xyz;
+
 	toCamera = cameraPos - (location * vec4(position,1.0)).xyz;
 }

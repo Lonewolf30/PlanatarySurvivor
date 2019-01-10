@@ -259,7 +259,7 @@ public class Shader
     public void UpdateUniforms(Transform transform, Material material, RenderingEngine renderingEngine)
     {
         material.GetTexture("diffuse").Bind();
-        Light light = renderingEngine.getActiveLight();
+        Light light = renderingEngine.getLight();
 
         Matrix4f worldMatrix = transform.GetTransformation();
         Matrix4f viewMatric = renderingEngine.getCamera().getViewPort().Mul(transform.GetTransformation());
@@ -269,9 +269,10 @@ public class Shader
         SetUniform("location", transform.GetPos());
         SetUniform("cameraPos", renderingEngine.getCamera().GetTransform().GetPos());
 
-        SetUniformf("intencity", light.getIntensity());
-        SetUniform("lightPos", light.getPos());
-        SetUniform("lightColor", light.getColor());
+            SetUniformf("intencity", light.getIntensity());
+            SetUniform("lightPos", light.getPos());
+            SetUniform("lightColor", light.getColor());
+
         SetUniformf("minbrightness", Float.parseFloat(Reference.configs.getValue("MinBrightness")));
         SetUniformf("shineDamp", material.GetFloat("shineDamp"));
         SetUniformf("refelct", material.GetFloat("refelct"));

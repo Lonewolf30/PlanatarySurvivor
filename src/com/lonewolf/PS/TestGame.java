@@ -13,8 +13,8 @@ public class TestGame extends Game
     public void init()
     {
         GuiFactory factory = new GuiFactory( 0);
-        factory.addItem(new GUIText("Pause Screen",400,300, false));
-        factory.addItem(new GUIButton(400,300,400,300,"Test")
+
+        factory.addItem(new GUIButton(300,250,400,200,"Run Game")
         {
             @Override
             public void run() {

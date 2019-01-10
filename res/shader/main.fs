@@ -14,19 +14,29 @@ uniform float minbrightness;
 uniform float shineDamp;
 uniform float refelct;
 
-void main(void){
+void main(void)
+{
 
-    float nDot1 = dot(normalize(surfaceNormal), normalize(toLightVector));
-    float brightness = max(nDot1, minbrightness);
+    vec3 normSurfaceNormal = normalize(surfaceNormal);
+    vec3 normToCamera = normalize(toCamera);
 
-    vec3 reflectedLight = reflect(-normalize(toLightVector), normalize(surfaceNormal));
-    float specularFactor = dot(reflectedLight, normalize(toCamera));
-    float specular = pow(max(specularFactor, 0.0), shineDamp);
+    vec3 totalDiffuse = vec3(0);
+    vec3 totalSpecular = vec3(0);
 
-    vec3 finalSpec = specular * lightColor * refelct;
+        float nDot1 = dot(normSurfaceNormal, normalize(toLightVector));
+        float brightness = max(nDot1, 0);
+        vec3 reflectedLight = reflect(-normalize(toLightVector), normalize(surfaceNormal));
+        float specularFactor = dot(reflectedLight, normToCamera);
+        float specular = pow(max(specularFactor, 0.0), shineDamp);
 
-    vec3 diffuse = brightness * lightColor * intencity;
+        vec3 finalSpec = specular * lightColor * refelct;
+        vec3 diffuse = brightness * lightColor * intencity;
 
-	out_Color = vec4(diffuse,1.0) * texture(modelTexture,pass_textureCoordinates) + vec4(finalSpec,1.0);
+        totalDiffuse += diffuse;
+        totalSpecular += finalSpec;
+
+    totalDiffuse = max(totalDiffuse, minbrightness);
+
+	out_Color = vec4(totalDiffuse,1.0) * texture(modelTexture,pass_textureCoordinates) + vec4(totalSpecular,1.0);
 
 }

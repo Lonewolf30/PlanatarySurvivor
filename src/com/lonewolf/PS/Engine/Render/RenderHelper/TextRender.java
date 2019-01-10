@@ -20,7 +20,7 @@ public class TextRender
 
     public TextRender(String text, boolean textChanges)
     {
-        this.text = " "+text;
+        this.text = text;
         this.textChanges = textChanges;
         generateBufferedImage();
     }
@@ -45,6 +45,7 @@ public class TextRender
 
         img = new BufferedImage((int) Math.ceil(rect.getWidth()), (int) Math.ceil(rect.getHeight()), BufferedImage.TYPE_4BYTE_ABGR);
         g = img.getGraphics();
+        g.setColor(Color.DARK_GRAY);
         g.setFont(f);
 
         FontMetrics fm = g.getFontMetrics();
@@ -63,7 +64,6 @@ public class TextRender
                 image.setRGB(i, j , img.getRGB(i, img.getHeight()-j));
             }
         }
-
     }
 
     public Texture getTextTexture()

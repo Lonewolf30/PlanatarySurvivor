@@ -1,3 +1,1 @@
 # PlanatarySurvivor
-
-LOL

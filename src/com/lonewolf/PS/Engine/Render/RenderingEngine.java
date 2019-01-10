@@ -16,9 +16,8 @@ public class RenderingEngine extends MappedValues
 	private Shader Shader2D;
 
 	private Camera camera;
-	private Light ActiveLight;
 
-	private ArrayList<Light> lights;
+	private Light light;
 
 	private boolean render3d;
 
@@ -33,13 +32,12 @@ public class RenderingEngine extends MappedValues
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_TEXTURE_2D);
 
-		glEnable(GL_ALPHA_TEST);
+		glEnable(GL_BLEND);
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		Shader3D = new Shader("main");
 		Shader2D = new Shader("2d");
-		lights = new ArrayList<>();
 		render3d = false;
 	}
 
@@ -60,12 +58,11 @@ public class RenderingEngine extends MappedValues
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		if (render3d)
-		lights.forEach(light -> {
-			ActiveLight = light;
 			object.forEach(this::Render3D);
-		});
 
+		glDisable(GL_DEPTH_TEST);
 		object.forEach(this::Render2D);
+		glEnable(GL_DEPTH_TEST);
 	}
 
 	public void setCamera(Camera camera) {
@@ -77,15 +74,18 @@ public class RenderingEngine extends MappedValues
 	}
 
     public void addLight(Light light) {
-		lights.add(light);
+		this.light = light;
     }
-
-	public Light getActiveLight() {
-		return ActiveLight;
-	}
 
     public void render3d(boolean runGame)
 	{
 		render3d = runGame;
     }
+
+	public Light getLight()
+	{
+		return light;
+	}
+
+
 }
