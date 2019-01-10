@@ -23,17 +23,19 @@ public abstract class GUIButton extends GUIAddon
     private BoxRender boxRender;
 
     private Texture texture;
+    private Texture selected = new Texture("buttonSelected.jpg");
+    private Texture unselected = new Texture("buttonUnselected.jpg");
 
     public GUIButton(float x, float y, float width, float height, String text) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.width = width/2;
+        this.height = height/2;
         this.text = new GUIText(text, x+width/32,y+height/8, false);
         this.text.center(x,y, width,height);
 
         boxRender = new BoxRender(width, height, x, y);
-        texture = new Texture("test.jpg");
+        texture = unselected;
     }
 
     @Override
@@ -48,13 +50,28 @@ public abstract class GUIButton extends GUIAddon
     @Override
     public void Input()
     {
+        Vector2f pos = Input.GetMousePosition();
+
+        if (pos.GetX()>x && pos.GetX() < x + width)
+        {
+            if (pos.GetY() > y && pos.GetY() < y + height)
+                texture = selected;
+            else
+                texture = unselected;
+        }
+        else
+            texture = unselected;
+
         if (Input.GetMouseDown(0))
         {
-            Vector2f pos = Input.GetMousePosition();
-
             if (pos.GetX() > x && pos.GetX() < x + width)
-                if (pos.GetY() > y  && pos.GetY() < y + height)
+            {
+                if (pos.GetY() > y && pos.GetY() < y + height)
+                {
                     run();
+                    System.out.println(pos);
+                }
+            }
         }
     }
 

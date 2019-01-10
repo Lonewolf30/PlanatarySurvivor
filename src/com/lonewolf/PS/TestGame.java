@@ -5,13 +5,16 @@ import com.lonewolf.PS.Engine.Component.Gui.Addon.GUIText;
 import com.lonewolf.PS.Engine.Component.Gui.GuiFactory;
 import com.lonewolf.PS.Engine.Core.Game;
 import com.lonewolf.PS.Engine.Core.GameObject;
+import com.lonewolf.PS.Engine.Core.Input;
 import com.lonewolf.PS.Engine.MainGame;
+import com.lonewolf.PS.Engine.Render.Window;
 
 public class TestGame extends Game
 {
     @Override
     public void init()
     {
+        Input.SetMousePosition(Window.getDisplaySize().Div(2));
         GuiFactory factory = new GuiFactory( 0);
 
         factory.addItem(new GUIButton(300,350,400,200,"Run Game")

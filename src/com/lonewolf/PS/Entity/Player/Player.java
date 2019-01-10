@@ -10,6 +10,7 @@ import com.lonewolf.PS.Engine.Core.Vector2f;
 import com.lonewolf.PS.Engine.Core.Vector3f;
 import com.lonewolf.PS.Engine.Render.Window;
 import com.lonewolf.PS.Entity.BaseEntity;
+import com.lonewolf.PS.TestGame;
 
 public class Player extends BaseEntity
 {
@@ -34,13 +35,13 @@ public class Player extends BaseEntity
         guiFactory = new GuiFactory(Input.KEY_ESCAPE);
 
         guiFactory.addItem(new GUIText("Pause Screen",400,300, false));
-//        guiFactory.addItem(new GUIButton(0f,0f,400f,400f,"Test")
-//        {
-//            @Override
-//            public void run() {
-//                engine.stop();
-//            }
-//        });
+
+        guiFactory.addItem(new GUIButton(300,150,400,200,"Exit") {
+            @Override
+            public void run() {
+                engine.setGame(new TestGame());
+            }
+        });
 
         addComponet(new FreeMove(12f));
         addComponet(new FreeLook(0.5f));
