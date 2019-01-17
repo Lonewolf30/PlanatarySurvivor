@@ -69,7 +69,6 @@ public abstract class GUIButton extends GUIAddon
                 if (pos.GetY() > y && pos.GetY() < y + height)
                 {
                     run();
-                    System.out.println(pos);
                 }
             }
         }

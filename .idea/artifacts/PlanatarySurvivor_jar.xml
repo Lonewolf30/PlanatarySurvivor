@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PlanatarySurvivor:jar">
+    <output-path>$PROJECT_DIR$/src/JarFile/PlanatarySurvivorJar</output-path>
+    <root id="archive" name="PlanatarySurvivor.jar">
+      <element id="module-output" name="PlanatarySurvivor" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lwjgl-2.9.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/slick-util.jar" path-in-jar="/" />
+      <element id="library" level="project" name="src" />
+    </root>
+  </artifact>
+</component>

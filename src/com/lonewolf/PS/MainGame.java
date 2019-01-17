@@ -2,7 +2,7 @@ package com.lonewolf.PS;
 
 import com.lonewolf.PS.Engine.Initialisation;
 
-public class Main
+public class MainGame
 {
     public static void main(String[] args)
     {
